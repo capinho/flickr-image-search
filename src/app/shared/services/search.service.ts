@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { HttpContentType, PhotosRootModel } from '../model';
+import { HttpContentType, Photo, PhotosRootModel } from '../model';
 import { BaseRestApiService } from './_base-rest-api.service';
 
 @Injectable({
@@ -71,4 +71,25 @@ export class SearchService extends BaseRestApiService {
       HttpContentType.text
     );
   }
+
+  public searchImagesFromUser(
+    user: string,
+  ) {
+    let urlParam: any = {};
+    urlParam.method = "flickr.people.getPublicPhotos";
+    urlParam.user_id = user;
+    urlParam.api_key = "935a15b96c21e62c5ab32501bd9da533";
+    urlParam.format = 'json';
+    urlParam.nojsoncallback = 1;
+    urlParam.per_page = 10;
+
+    return this.get<PhotosRootModel>(
+      `${environment.flickerApiUrl}`,
+      urlParam,
+      null,
+      HttpContentType.text
+    );
+
+  }
+
 }

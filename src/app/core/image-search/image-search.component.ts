@@ -19,6 +19,7 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
   protected destroyActions = new Subject<boolean>();
 
   photos = new Photos();
+  photosFromUser = new Photos();
   isLoading = false;
   imagesPerPage = 50;
   pageNumber = 1;
@@ -80,18 +81,34 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.coreService.setIsLoading(false);
         this.photos = result.photos;
-        // console.log('result', result);
+        console.log('result', result);
       });
   }
+
+  findPhotosFromUser(photo: Photo) {
+    this.isLoading = true;
+    this.coreService.setIsLoading(true);
+    const photos = this.searchService.searchImagesFromUser(photo.owner).pipe(takeUntil(this.destroyActions)).subscribe((res : PhotosRootModel) => {
+      this.isLoading = false;
+      this.coreService.setIsLoading(false);
+      this.photosFromUser = res.photos;
+    })
+  } 
 
   loadNext(event: any) {
     this.pageNumber = event.first / this.imagesPerPage + 1;
     this.search();
   }
 
+  loadUserPictures(event: any) {
+    console.log("load user pics");
+    if(this.photos.photo) this.findPhotosFromUser(this.photos.photo[this.activeIndex]);
+  }
+
   previewImage(photo: Photo, index: number) {
     this.displayPreview = true;
     this.activeIndex = index;
+    this.findPhotosFromUser(photo);
   }
 
   public ngOnDestroy() {

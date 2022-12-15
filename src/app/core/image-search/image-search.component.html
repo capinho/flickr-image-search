@@ -23,9 +23,7 @@
           tabindex="0"
           role="button"
           (click)="previewImage(photo, i)"
-          style="background-image:url('//live.staticflickr.com/{{
-            photo.server
-          }}/{{ photo.id }}_{{ photo.secret }}_n.jpg');"
+          style="background-image:url('//live.staticflickr.com/{{photo.server}}/{{ photo.id}}_{{photo.secret}}_n.jpg');"
         ></div>
       </ng-template>
     </p-dataView>
@@ -46,23 +44,20 @@
 >
   <ng-template pTemplate="item" let-photo>
     <img
-      [src]="
-        '//live.staticflickr.com/' +
-        photo.server +
-        '/' +
-        photo.id +
-        '_' +
-        photo.secret +
-        '_b.jpg'
-      "
+      [src]="'//live.staticflickr.com/'+ photo.server + '/' + photo.id + '_' + photo.secret + '_b.jpg'"
       style="width: 100%; display: block"
     />
   </ng-template>
   <ng-template pTemplate="caption" let-photo>
-    <h4 style="margin-bottom: 0.5rem; color: #ffffff">
-      BY: {{ photo.description }}
-    </h4>
+    <h4 style="margin-bottom: 0.5rem; color: #ffffff">{{photo.title}}</h4>
+    <p *ngIf="photo.description" [innerHTML]="photo.description._content"></p>
+    <p> {{ photo.datetaken }} </p>
   </ng-template>
+  <p-dataView [value]="photosFromUser.photo" [lazy]="true" [totalRecords]="10" (onLazyLoad)="loadUserPictures($event)" [rows]="1">
+    <ng-template let-photo pTemplate="gridItem">
+    <div class="img-card" style="background-image: url('//live.staticflickr.com/{{photo.id}})"></div>
+    </ng-template>
+  </p-dataView>
 
   <!-- <ng-template pTemplate="thumbnail" let-photo>
     <div class="grid grid-nogutter justify-content-center">
@@ -70,3 +65,4 @@
     </div>
   </ng-template> -->
 </p-galleria>
+

@@ -11,6 +11,9 @@ export class Photo {
   isfamily!: number;
   smallImageUrl!: string;
   largeImageUrl!: string;
+  photosFromSameOwner?: Photos;
+  datetaken!: Date;
+
   constructor(obj2clone?: Photo, modifierObj?: {}) {
     if (obj2clone) {
       Object.assign(this, obj2clone);

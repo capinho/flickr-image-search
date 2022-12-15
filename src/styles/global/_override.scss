@@ -35,6 +35,18 @@
   }
 }
 
+.color-swatch-item.checked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.color-swatch-item.checked::before {
+  content: "✓";
+  color: white;
+  font-family: monospace;
+}
+
 //Button color has to refined
 // $midday: #ffffff;
 // $midnight: #000000;
