@@ -43,7 +43,7 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
   constructor(
     public searchService: SearchService,
     private coreService: CoreService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.coreService
@@ -62,26 +62,29 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
   }
 
   search() {
-    this.isLoading = true;
-    this.coreService.setIsLoading(true);
-    this.searchService
-      .searchImage(
-        this.searchText,
-        this.imagesPerPage,
-        this.pageNumber,
-        this.searchFilterModel.searchInText,
-        this.searchFilterModel.fromDate,
-        this.searchFilterModel.toDate,
-        this.searchFilterModel.contentType,
-        this.searchFilterModel.colorCode
-      )
-      .pipe(takeUntil(this.destroyActions))
-      .subscribe((result: PhotosRootModel) => {
-        this.isLoading = false;
-        this.coreService.setIsLoading(false);
-        this.photos = result.photos;
-        // console.log('result', result);
-      });
+    if (typeof this.searchText != undefined && this.searchText) {
+
+      this.isLoading = true;
+      this.coreService.setIsLoading(true);
+      this.searchService
+        .searchImage(
+          this.searchText,
+          this.imagesPerPage,
+          this.pageNumber,
+          this.searchFilterModel.searchInText,
+          this.searchFilterModel.fromDate,
+          this.searchFilterModel.toDate,
+          this.searchFilterModel.contentType,
+          this.searchFilterModel.colorCode
+        )
+        .pipe(takeUntil(this.destroyActions))
+        .subscribe((result: PhotosRootModel) => {
+          this.isLoading = false;
+          this.coreService.setIsLoading(false);
+          this.photos = result.photos;
+          // console.log('result', result);
+        });
+    }
   }
 
   loadNext(event: any) {

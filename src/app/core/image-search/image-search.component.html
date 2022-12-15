@@ -3,60 +3,25 @@
     <app-image-filter (onSelect)="filter($event)"></app-image-filter>
   </div>
   <div class="image-collection-container">
-    <p-dataView
-      #dv
-      [value]="photos.photo"
-      [lazy]="true"
-      [totalRecords]="photos.total"
-      [loading]="isLoading"
-      (onLazyLoad)="loadNext($event)"
-      [paginator]="true"
-      [rows]="photos.perpage"
-      layout="grid"
-    >
+    <p-dataView #dv [value]="photos.photo" [lazy]="true" [totalRecords]="photos.total" [loading]="isLoading"
+      (onLazyLoad)="loadNext($event)" [paginator]="true" [rows]="photos.perpage" layout="grid">
       <ng-template let-photo pTemplate="listItem">
         <span>List Not yet finished 😔</span>
       </ng-template>
       <ng-template let-photo pTemplate="gridItem" let-i="rowIndex">
-        <div
-          class="img-card"
-          tabindex="0"
-          role="button"
-          (click)="previewImage(photo, i)"
-          style="background-image:url('//live.staticflickr.com/{{
-            photo.server
-          }}/{{ photo.id }}_{{ photo.secret }}_n.jpg');"
-        ></div>
+        <div class="img-card" tabindex="0" role="button" (click)="previewImage(photo, i)"
+          style="background-image:url('//live.staticflickr.com/{{photo.server}}/{{ photo.id }}_{{ photo.secret }}_n.jpg');">
+        </div>
       </ng-template>
     </p-dataView>
   </div>
 </div>
 
-<p-galleria
-  [value]="photos.photo"
-  [(visible)]="displayPreview"
-  [containerStyle]="{ 'max-width': '850px' }"
-  [(activeIndex)]="activeIndex"
-  [numVisible]="10"
-  [circular]="true"
-  [fullScreen]="true"
-  [showItemNavigators]="true"
-  [showThumbnails]="false"
-  [baseZIndex]="100000"
->
+<p-galleria [value]="photos.photo" [(visible)]="displayPreview" [containerStyle]="{ 'max-width': '850px' }"
+  [(activeIndex)]="activeIndex" [numVisible]="10" [circular]="true" [fullScreen]="true" [showItemNavigators]="true"
+  [showThumbnails]="false" [baseZIndex]="100000">
   <ng-template pTemplate="item" let-photo>
-    <img
-      [src]="
-        '//live.staticflickr.com/' +
-        photo.server +
-        '/' +
-        photo.id +
-        '_' +
-        photo.secret +
-        '_b.jpg'
-      "
-      style="width: 100%; display: block"
-    />
+    <img [src]="'//live.staticflickr.com/' + photo.server + '/' + photo.id + '_' + photo.secret + '_b.jpg'" style="width: 100%; display: block" />
   </ng-template>
   <ng-template pTemplate="caption" let-photo>
     <h4 style="margin-bottom: 0.5rem; color: #ffffff">
