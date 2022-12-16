@@ -62,6 +62,7 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
   }
 
   search() {
+    // Recherche non vide
     if (typeof this.searchText != undefined && this.searchText) {
       this.isLoading = true;
       this.coreService.setIsLoading(true);
@@ -84,6 +85,7 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
           // console.log('result', result);
         });
     }
+    // Sinon on fait rien
   }
 
   loadNext(event: any) {
