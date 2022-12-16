@@ -63,7 +63,6 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
 
   search() {
     if (typeof this.searchText != undefined && this.searchText) {
-
       this.isLoading = true;
       this.coreService.setIsLoading(true);
       this.searchService
