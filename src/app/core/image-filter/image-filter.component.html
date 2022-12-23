@@ -73,6 +73,17 @@
         </p-calendar>
       </div>
     </p-accordionTab>
+    <p-accordionTab header="Safe search options">
+      <p-toggleButton 
+        [(ngModel)]="safeSearchFilter" 
+        onLabel="☂️ Safe search activated"
+        onIcon="safe-icon" 
+        offLabel="🍆 Safe search disabled"
+        offIcon="unsafe-icon"
+        (onChange)="activateSafeSearch()"
+      >
+    </p-toggleButton>
+    </p-accordionTab>
   </p-accordion>
   <p-blockUI [blocked]="blockedDocument"></p-blockUI>
 </div>

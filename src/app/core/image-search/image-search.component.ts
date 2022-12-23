@@ -23,8 +23,9 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
   isLoading = false;
   imagesPerPage = 50;
   pageNumber = 1;
-  activeIndex = 0;
+  activeIndex ?: number;
   searchText!: string;
+  safe_search = 1;
   searchFilterModel = new SearchFilterModel();
   responsiveOptions: any[] = [
     {
@@ -59,6 +60,8 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
 
   filter(searchFilter: SearchFilterModel) {
     this.searchFilterModel = searchFilter;
+    this.activeIndex = undefined;
+    console.log("ff", this.searchFilterModel);
     this.search();
   }
 
@@ -74,7 +77,8 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
         this.searchFilterModel.fromDate,
         this.searchFilterModel.toDate,
         this.searchFilterModel.contentType,
-        this.searchFilterModel.colorCode
+        this.searchFilterModel.colorCode,
+        this.searchFilterModel.safe_search,
       )
       .pipe(takeUntil(this.destroyActions))
       .subscribe((result: PhotosRootModel) => {
@@ -85,30 +89,14 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
       });
   }
 
-  findPhotosFromUser(photo: Photo) {
-    this.isLoading = true;
-    this.coreService.setIsLoading(true);
-    const photos = this.searchService.searchImagesFromUser(photo.owner).pipe(takeUntil(this.destroyActions)).subscribe((res : PhotosRootModel) => {
-      this.isLoading = false;
-      this.coreService.setIsLoading(false);
-      this.photosFromUser = res.photos;
-    })
-  } 
-
   loadNext(event: any) {
     this.pageNumber = event.first / this.imagesPerPage + 1;
     this.search();
   }
 
-  loadUserPictures(event: any) {
-    console.log("load user pics");
-    if(this.photos.photo) this.findPhotosFromUser(this.photos.photo[this.activeIndex]);
-  }
-
   previewImage(photo: Photo, index: number) {
     this.displayPreview = true;
     this.activeIndex = index;
-    this.findPhotosFromUser(photo);
   }
 
   public ngOnDestroy() {

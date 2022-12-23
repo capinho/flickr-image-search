@@ -1,0 +1,34 @@
+.photo-description {
+    margin-top : 2rem;
+    max-width: 1000p;
+
+    & .desc {
+        font-style: italic;
+    }
+}
+
+.user-pics {
+    display: flex;
+    gap: 10px;
+
+    img {
+        object-fit: cover;
+
+        &:hover {
+            cursor: pointer;
+        }
+    }
+
+    &-title {
+        display: inline-flex;
+        align-items: center;
+        gap: .5rem;
+    }
+}
+
+.filters {
+    margin: .5rem 0;
+    display: flex;
+    gap: .5rem;
+    flex-wrap: wrap;
+}

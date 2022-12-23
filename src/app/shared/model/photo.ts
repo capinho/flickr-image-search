@@ -1,10 +1,12 @@
 export class Photo {
   id!: string;
   owner!: string;
-  description!: string;
+  description!: any;
   secret!: string;
   server!: string;
+  iconserver ?: number;
   farm!: number;
+  iconfarm ?: number;
   title!: string;
   ispublic!: number;
   isfriend!: number;
@@ -13,12 +15,13 @@ export class Photo {
   largeImageUrl!: string;
   photosFromSameOwner?: Photos;
   datetaken!: Date;
+  ownername !: string;
+  tags !: string;
+  geo: any;
 
   constructor(obj2clone?: Photo, modifierObj?: {}) {
     if (obj2clone) {
       Object.assign(this, obj2clone);
-      // this.smallImageUrl = `//live.staticflickr.com/${this.server}/${this.id}_${this.secret}_n.jpg`;
-      // this.largeImageUrl = `//live.staticflickr.com/${this.server}/${this.id}_${this.secret}_b.jpg`;
     }
     if (modifierObj) {
       Object.assign(this, modifierObj);
@@ -65,6 +68,7 @@ export class SearchFilterModel {
   fromDate!: Date;
   toDate!: Date;
   colorCode!: string;
+  safe_search !: number;
   constructor(obj2clone?: SearchFilterModel, modifierObj?: {}) {
     if (obj2clone) {
       Object.assign(this, obj2clone);
