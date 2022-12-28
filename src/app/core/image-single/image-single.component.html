@@ -1,0 +1,17 @@
+<p-dialog [(visible)]="display" [draggable]="false" position="top-left">
+    <img [src]="'//live.staticflickr.com/'+ activePhoto.server + '/' + activePhoto.id + '_' + activePhoto.secret + '_b.jpg'"/>
+    <div class="photo-description">
+        <h4 style="margin-bottom: 0.5rem; color: #ffffff">{{activePhoto.title}}</h4>
+        <p class="desc" *ngIf="activePhoto.description" [innerHTML]="activePhoto.description._content"></p>
+        <p> {{ activePhoto.datetaken }} </p>
+        <div class="filters">
+            <p-chip *ngFor="let tag of tags" [label]="'#' + tag"></p-chip>
+        </div>
+
+        <p class="user-pics-title">Other pics by <p-chip [label]="activePhoto.ownername" [image]="buddyCon"></p-chip> : </p>
+        <div *ngIf="photosFromUser | async as pics" class="user-pics">
+            <img *ngFor="let photo of pics.photo" [src]="'//live.staticflickr.com/'+ photo.server + '/' + photo.id + '_' + photo.secret + '_b.jpg'" [alt]="photo.title" width="100" height="100" (click)="setPhoto(photo)"/>
+        </div>
+
+    </div>
+</p-dialog>

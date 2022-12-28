@@ -35,6 +35,63 @@
   }
 }
 
+.color-swatch-item {
+  border-radius: 50% !important;
+  
+  &.checked {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid transparent;
+
+    &::before {
+    content: "✓";
+    color: white;
+    font-family: monospace;
+  }
+
+  &.dark {
+    border-color: black;
+    &::before {
+    color: black;
+  }
+}
+}
+}
+
+.p-dialog-top-left .p-dialog {
+  margin: 0 !important;
+}
+
+.p-dialog {
+  background: rgba(0, 0, 0, .9);
+  width: 100vw;
+  max-height: 100% !important;
+  height: 100vh;
+  .p-dialog-header, .p-dialog-content, .p-dialog-footer {
+      background: transparent;
+      color: white;
+  }
+
+  img {
+    max-width: 1000px;
+    max-height: 500px;
+  }
+
+  &-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
+.filters {
+  .p-chip {
+    background-color: black;
+    color: white;
+  }
+}
+
 //Button color has to refined
 // $midday: #ffffff;
 // $midnight: #000000;

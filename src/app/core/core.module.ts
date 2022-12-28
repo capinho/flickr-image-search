@@ -5,6 +5,7 @@ import { SharedModule } from '../shared/shared.module';
 import { AppRoutingModule } from '../app-routing.module';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ImageSearchComponent } from './image-search/image-search.component';
+import { ImageSingleComponent } from './image-single/image-single.component';
 
 import { ImageModule } from 'primeng/image';
 import { PanelModule } from 'primeng/panel';
@@ -25,8 +26,10 @@ import { CheckboxModule } from 'primeng/checkbox';
 import { CoreService } from './core.service';
 import { TooltipModule } from 'primeng/tooltip';
 import { BlockUIModule } from 'primeng/blockui';
-import { GalleriaModule } from 'primeng/galleria';
+import { DialogModule } from 'primeng/dialog';
 import { ProgressBarModule } from 'primeng/progressbar';
+import { ChipModule } from 'primeng/chip';
+import {ToggleButtonModule} from 'primeng/togglebutton';
 
 @NgModule({
   declarations: [
@@ -34,6 +37,7 @@ import { ProgressBarModule } from 'primeng/progressbar';
     PageNotFoundComponent,
     ImageSearchComponent,
     ImageFilterComponent,
+    ImageSingleComponent,
   ],
   imports: [
     CommonModule,
@@ -56,8 +60,10 @@ import { ProgressBarModule } from 'primeng/progressbar';
     CheckboxModule,
     TooltipModule,
     BlockUIModule,
-    GalleriaModule,
+    DialogModule,
     ProgressBarModule,
+    ChipModule,
+    ToggleButtonModule,
   ],
   providers: [CoreService],
 })

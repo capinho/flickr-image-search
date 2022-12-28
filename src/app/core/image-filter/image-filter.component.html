@@ -4,9 +4,8 @@
       <div class="flex align-items-stretch flex-wrap color-swatch">
         <div
           *ngFor="let colorSwatch of colorSwatchs"
-          tabindex="0"
           role="button"
-          [style.backgroundColor]="colorSwatch.colorCode"
+          [style.background-color]="colorSwatch.colorCode"
           [ngClass]="{
             'color-swatch-border': colorSwatch.color === 'c',
             dark: colorSwatch.isLightColor,
@@ -73,6 +72,17 @@
         >
         </p-calendar>
       </div>
+    </p-accordionTab>
+    <p-accordionTab header="Safe search options">
+      <p-toggleButton 
+        [(ngModel)]="safeSearchFilter" 
+        onLabel="☂️ Safe search activated"
+        onIcon="safe-icon" 
+        offLabel="🍆 Safe search disabled"
+        offIcon="unsafe-icon"
+        (onChange)="activateSafeSearch()"
+      >
+    </p-toggleButton>
     </p-accordionTab>
   </p-accordion>
   <p-blockUI [blocked]="blockedDocument"></p-blockUI>

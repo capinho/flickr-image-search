@@ -30,6 +30,10 @@ export class ImageFilterComponent implements OnInit, OnDestroy {
   imageContentTypes: any[] = [];
   selectedImageContentTypes: any[] = [];
 
+  safeSearchFilter : boolean;
+
+  mediaType : string;
+
   colorSwatchs: ColorSwatch[] = [];
   constructor(private coreService: CoreService) {
     this.searchInOptions = [
@@ -153,6 +157,9 @@ export class ImageFilterComponent implements OnInit, OnDestroy {
     ];
 
     this.selectedImageContentTypes = this.imageContentTypes;
+
+    this.mediaType = 'all';
+    this.safeSearchFilter = true;
   }
 
   ngOnInit(): void {
@@ -169,16 +176,16 @@ export class ImageFilterComponent implements OnInit, OnDestroy {
     this.filterEmit();
   }
 
-  // searchInChange(event: any) {
-  //   this.filterEmit();
-  // }
+  selectMediaType(type : string) {
+    this.mediaType = type;
+    this.filterEmit();
+  }
 
-  // imageContentTypeChange(event: any) {
-  //   this.filterEmit();
-  // }
+  activateSafeSearch() {
+    this.filterEmit();
+  }
 
   filterEmit() {
-    console.log();
     this.onSelect.emit(
       new SearchFilterModel({
         searchInText: this.selectedSearchInOptions,
@@ -191,6 +198,7 @@ export class ImageFilterComponent implements OnInit, OnDestroy {
           .filter((e) => e.isSelected === true)
           .map((c) => c.color)
           .toString(),
+        safe_search: this.safeSearchFilter ? 1 : 2, // 1 = safe ; 3 = restricted
       })
     );
   }
