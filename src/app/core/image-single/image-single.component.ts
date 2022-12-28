@@ -50,7 +50,6 @@ export class ImageSingleComponent implements OnInit, OnDestroy, OnChanges {
 
   setBuddyCon() {
     const {iconfarm, iconserver, owner} = this.activePhoto;
-    console.log(iconfarm, iconserver, owner);
     if(iconfarm && iconfarm > 0 && iconserver && owner) {
       this.buddyCon = `http://farm${iconfarm}.staticflickr.com/${iconserver}/buddyicons/${owner}.jpg`;
     } else {
@@ -59,7 +58,6 @@ export class ImageSingleComponent implements OnInit, OnDestroy, OnChanges {
   }
 
   public ngOnDestroy() {
-    console.log("destroyed");
   }
 
 }

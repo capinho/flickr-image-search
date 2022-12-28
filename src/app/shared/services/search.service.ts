@@ -74,7 +74,6 @@ export class SearchService extends BaseRestApiService {
     urlParam.parse_tags = 1;
     urlParam.content_type = 7;
     urlParam.extras = this.extras;
-    console.log("url", urlParam);
     return this.get<PhotosRootModel>(
       `${environment.flickerApiUrl}`,
       urlParam,

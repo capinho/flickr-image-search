@@ -23,7 +23,7 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
   isLoading = false;
   imagesPerPage = 50;
   pageNumber = 1;
-  activeIndex ?: number;
+  activeIndex : number = 0;
   searchText!: string;
   safe_search = 1;
   searchFilterModel = new SearchFilterModel();
@@ -52,7 +52,6 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
       .getSearchValue()
       .pipe(takeUntil(this.destroyActions))
       .subscribe((text: string) => {
-        console.log('text', text);
         this.searchText = text;
         this.search();
       });
@@ -60,12 +59,12 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
 
   filter(searchFilter: SearchFilterModel) {
     this.searchFilterModel = searchFilter;
-    this.activeIndex = undefined;
-    console.log("ff", this.searchFilterModel);
+    this.displayPreview = false;
     this.search();
   }
 
   search() {
+    if(this.searchText && typeof this.searchText !== undefined) {
     this.isLoading = true;
     this.coreService.setIsLoading(true);
     this.searchService
@@ -85,8 +84,8 @@ export class ImageSearchComponent implements OnInit, OnDestroy {
         this.isLoading = false;
         this.coreService.setIsLoading(false);
         this.photos = result.photos;
-        console.log('result', result);
       });
+    }
   }
 
   loadNext(event: any) {
