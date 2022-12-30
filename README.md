@@ -6,7 +6,7 @@
   <br>  
   <br>
 </p>
-<p> Check online : <a href="https://flickr-image-search-three.vercel.app"> https://flickr-image-search-three.vercel.app </a>
+<p> Check online : <a href="https://flickr-image-search-three.vercel.app" target="_blank"> https://flickr-image-search-three.vercel.app </a>
 
 ## Development server
 
